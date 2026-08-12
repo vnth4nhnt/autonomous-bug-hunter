@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PROJECT_DIR:-.}/.runtime/playwright-mcp/node_modules/@playwright/mcp/cli.js",
+        "--headless",
+        "--isolated",
+        "--output-dir",
+        "${CLAUDE_PROJECT_DIR:-.}/.runtime/playwright-output",
+        "--viewport-size",
+        "1366x768"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "${CLAUDE_PROJECT_DIR:-.}/.runtime/playwright-browsers"
+      }
+    },
+    "playwright-headed": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PROJECT_DIR:-.}/.runtime/playwright-mcp/node_modules/@playwright/mcp/cli.js",
+        "--isolated",
+        "--output-dir",
+        "${CLAUDE_PROJECT_DIR:-.}/.runtime/playwright-output",
+        "--viewport-size",
+        "1366x768"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "${CLAUDE_PROJECT_DIR:-.}/.runtime/playwright-browsers"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# Generated runtime and private engagement data
+.runtime/
+engagements/
+
+# Machine-local Claude state
+.claude/settings.local.json
+
+# Secrets
+.env
+.env.*
+*.secret
+*.dpapi
+*.key
+*.pem
+
+# OS noise
+.DS_Store
+Thumbs.db

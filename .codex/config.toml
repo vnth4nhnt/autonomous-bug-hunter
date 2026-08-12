@@ -1,0 +1,9 @@
+[mcp_servers.playwright]
+command = "node"
+args = ["./.runtime/playwright-mcp/node_modules/@playwright/mcp/cli.js", "--headless", "--isolated", "--output-dir", "./.runtime/playwright-output", "--viewport-size", "1366x768"]
+env = { PLAYWRIGHT_BROWSERS_PATH = "./.runtime/playwright-browsers" }
+
+[mcp_servers.playwright-headed]
+command = "node"
+args = ["./.runtime/playwright-mcp/node_modules/@playwright/mcp/cli.js", "--isolated", "--output-dir", "./.runtime/playwright-output", "--viewport-size", "1366x768"]
+env = { PLAYWRIGHT_BROWSERS_PATH = "./.runtime/playwright-browsers" }

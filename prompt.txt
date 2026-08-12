@@ -1,0 +1,1 @@
+Start an authorized autonomous bug hunting engagement named `<NAME>` using `<SCOPE_FILE>` as the authorization boundary. Execute the full methodology end to end. Continue autonomously until all terminal conditions hold. Pause only for an exact operator-only prerequisite or interaction.

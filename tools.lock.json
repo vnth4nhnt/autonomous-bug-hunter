@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "go": {
+    "subfinder": { "module": "github.com/projectdiscovery/subfinder/v2/cmd/subfinder", "version": "v2.14.0" },
+    "httpx": { "module": "github.com/projectdiscovery/httpx/cmd/httpx", "version": "v1.10.0" },
+    "naabu": { "module": "github.com/projectdiscovery/naabu/v2/cmd/naabu", "version": "v2.6.1" },
+    "ffuf": { "module": "github.com/ffuf/ffuf/v2", "version": "v2.2.1" },
+    "interactsh-client": { "module": "github.com/projectdiscovery/interactsh/cmd/interactsh-client", "version": "v1.3.1" },
+    "sourcemapper": { "module": "github.com/denandz/sourcemapper", "version": "v0.0.0-20260724091236-f739bd5dd266" }
+  },
+  "python": {
+    "git-dumper": "1.0.9",
+    "sqlmap": "1.10.8"
+  },
+  "npm": {
+    "@playwright/mcp": "0.0.79"
+  },
+  "wordlists": {
+    "sensitive-baseline": {
+      "version": "8512da9892c1f88b5a62b958bec4a6b2974d66ed",
+      "file": ".claude/skills/recon-pipeline/assets/sensitive-baseline.txt",
+      "entries": 5384,
+      "sha256": "8c4b1861ac7b0cfc975e8d9a0eeeb715a0fe5c9b96127b397d02bcff3d0cd2b5",
+      "source": "https://raw.githubusercontent.com/Bo0oM/fuzz.txt/8512da9892c1f88b5a62b958bec4a6b2974d66ed/fuzz.txt"
+    }
+  }
+}
