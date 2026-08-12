@@ -11,7 +11,7 @@ The orchestrator runs this skill inline at the private-state boundary; do not de
 
 ## Derive the fixture need
 
-Start from the canonical operation/flow or hypothesis. Name the exact missing subject, tenant, role, lifecycle state, credential type, owned object, and positive/negative control it enables. Do not build a fixed account matrix or create speculative tenants/accounts.
+Start from the canonical decision or hypothesis. Name the exact missing subject, tenant, role, lifecycle state, credential type, owned object, and positive/negative control it enables. For federation, also name the in-scope relying party, normal IdP/issuer, client/tenant, callback, account-linking state and session outcome needed; use the external provider normally and test only the authorized local decisions. Do not build a fixed account matrix or create speculative tenants/accounts.
 
 Prefer existing operator-provided test identities and privately controlled email addresses. Use consumer self-signup only when program rules permit it; use the normal browser flow and a private disposable inbox/domain, never a public temporary mailbox. Use SSO, payment, or transit systems normally without probing them.
 
@@ -23,11 +23,11 @@ For financial, KYC, enterprise, paid, production-sensitive, or staff-only states
 2. Obtain the minimum missing identity through the product's normal signup, invite, membership, role-change, or tenant-creation flow.
 3. Stop for the operator at CAPTCHA, OTP, bot protection, KYC, PII, payment, domain approval, or any human-verification gate. Never rotate domains or flows to evade a control.
 4. Create unique controlled markers and only the disposable objects required for positive, negative, same-tenant, or cross-tenant fixtures.
-5. Capture a baseline happy path and denial relevant to the active question. After role, tenant, plan, or credential changes, re-baseline rather than assuming the label changed enforcement.
+5. Capture a baseline happy path and denial relevant to the active question. For federated identity, record initiation, issuer/client/tenant selection, callback binding and resulting local subject/session without persisting secrets. After role, tenant, plan, link, or credential changes, re-baseline rather than assuming the label changed enforcement.
 
 ## Tool routing
 
-Use headless `playwright` for normal signup, login, invite, role and tenant flows because it preserves browser state and exposes the authentication realm, redirects, baseline requests and human gates. Use `playwright-headed` only when operator interaction is unavoidable or a recorded headless limitation blocks the exact step; complete that step, then return to headless. Stop for the operator when credentials, mailbox access, CAPTCHA, OTP, payment or approval cannot remain private and tool-managed.
+Use the product's normal channel that preserves the fixture's credential and lifecycle semantics. Headless `playwright` is preferred for browser signup, login, invite, role and tenant flows because it exposes redirects, state and human gates; use a protocol client for API/service identities when browser context is irrelevant. Use headed mode only when operator interaction is unavoidable or a recorded headless limitation blocks the exact step. Stop for the operator when credentials, mailbox access, CAPTCHA, OTP, payment or approval cannot remain private and tool-managed.
 
 Name browser contexts with opaque fixture labels. Never place passwords, cookies, tokens or mailbox links in CLI arguments, prompt text, screenshots or exported captures. Record only redacted request identifiers and observed capabilities.
 
@@ -43,6 +43,6 @@ Never copy a secret-bearing legacy artifact into a new prompt. If one is encount
 
 ## Capability and lifecycle record
 
-For each identity label, record tenant/membership, claimed role, observed capabilities, owned fixture IDs, authentication realm/channel, credential lifecycle events, valid assets, expiry, blockers, and cleanup owner in `engagements/<name>/knowledge-base/identities.md`. Retire or revoke disposable identities/credentials and verify cleanup where the product permits it.
+For each identity label, record tenant/membership, claimed role, observed capabilities, owned fixture IDs, authentication realm/channel, federation topology when applicable, credential/session lifecycle events, valid assets, expiry, blockers, and cleanup owner in `engagements/<name>/knowledge-base/identities.md`. Retire or revoke disposable identities/credentials and verify cleanup where the product permits it.
 
 Return fixture requirements satisfied, observed capability deltas, private labels usable by tools, owned objects, missing fixtures, blockers, expiry/reopen conditions, and verified or operator-owned cleanup. Never return raw credentials.

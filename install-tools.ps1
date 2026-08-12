@@ -106,6 +106,11 @@ foreach ($item in $lock.wordlists.PSObject.Properties) {
     if ($current -ne $spec.sha256) { throw "${name}: checksum mismatch" }
     $entries = (Get-Content -LiteralPath $path | Where-Object { $_.Trim() }).Count
     if ($entries -ne $spec.entries) { throw "${name}: expected $($spec.entries) entries, found $entries" }
+    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+    foreach ($line in (Get-Content -LiteralPath $path)) {
+        if ($line.Trim() -and -not $seen.Add($line)) { throw "${name}: exact duplicate entry: $line" }
+    }
+    if ($seen.Count -ne $spec.entries) { throw "${name}: expected $($spec.entries) exact unique entries, found $($seen.Count)" }
     Write-Host "[OK] $name $($spec.version) ($entries entries)"
 }
 

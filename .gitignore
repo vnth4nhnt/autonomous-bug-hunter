@@ -5,6 +5,9 @@ engagements/
 # Machine-local Claude state
 .claude/settings.local.json
 
+# Machine-local editor state
+.vscode/
+
 # Secrets
 .env
 .env.*

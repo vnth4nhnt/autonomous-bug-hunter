@@ -1,5 +1,5 @@
 # Autonomous Bug Hunter
-Prompt-based autonomous black-box web security testing workflow for authorized targets. Claude Code is the primary client; Codex uses the same kernel, skills, and agent contracts through `AGENTS.md`.
+Prompt-based autonomous evidence-adaptive web security testing workflow for authorized targets. It follows security decisions and value flows through recon, source/runtime/schema-assisted extraction, hypothesis-driven hunting, independent validation, reporting, and audited closure. Claude Code is the primary client; Codex uses the same kernel, skills, and agent contracts through `AGENTS.md`.
 
 ## Setup
 
