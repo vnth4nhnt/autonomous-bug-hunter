@@ -22,6 +22,6 @@ Declare the assets/flows, roles/states, time window, evidence sources and deploy
 
 ## Writes and verdict
 
-Write only `engagements/<name>/knowledge-base/audits/<audit-id>.md` and assigned fresh redacted artifacts. Return exactly: audit id/boundary; evidence sampled; conclusions upheld/overturned/narrowed; reopen work; blockers/residuals and triggers; cleanup gaps; and `REOPEN` or `BOUNDED-PASS`.
+Write only `engagements/<name>/knowledge-base/audits/<audit-id>.md` and assigned fresh redacted artifacts. Treat any target-derived file outside the active engagement root or uncleared tool spill as `REOPEN`; valid reporting directories beneath that root are not evidence-path violations. Return exactly: audit id/boundary; evidence sampled; conclusions upheld/overturned/narrowed; reopen work; blockers/residuals and triggers; cleanup gaps; and `REOPEN` or `BOUNDED-PASS`.
 
-Use `BOUNDED-PASS` only when all eight terminal conditions in `CLAUDE.md` hold inside the declared boundary. Never repair another role's record, conduct open-ended hunting, validate a candidate by assertion, change shared queues, certify absence of vulnerabilities, or certify beyond the audited boundary.
+Use `BOUNDED-PASS` only when all nine terminal conditions in `CLAUDE.md` hold inside the declared boundary. Never repair another role's record, conduct open-ended hunting, validate a candidate by assertion, change shared queues, certify absence of vulnerabilities, or certify beyond the audited boundary.

@@ -17,11 +17,11 @@
   },
   "wordlists": {
     "sensitive-baseline": {
-      "version": "8512da9892c1f88b5a62b958bec4a6b2974d66ed",
+      "version": "high-signal-v2",
       "file": ".claude/skills/recon-pipeline/assets/sensitive-baseline.txt",
-      "profile": "safe-relative-path-v1",
-      "entries": 5325,
-      "sha256": "67b0d0a3fa9bcf47f99f3502f11b7fab6e5cea0dcd6882f45b568fc5a9c96449",
+      "profile": "high-signal-sensitive-relative-v2",
+      "entries": 343,
+      "sha256": "8fa8484d5e2284b6aaa0c645e7c51f59f7e6b927165b349f097319495ee6bad3",
       "source_entries": 5384,
       "source_sha256": "8c4b1861ac7b0cfc975e8d9a0eeeb715a0fe5c9b96127b397d02bcff3d0cd2b5",
       "source": "https://raw.githubusercontent.com/Bo0oM/fuzz.txt/8512da9892c1f88b5a62b958bec4a6b2974d66ed/fuzz.txt"

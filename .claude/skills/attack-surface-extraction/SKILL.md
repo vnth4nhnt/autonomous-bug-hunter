@@ -79,4 +79,4 @@ Close extraction only when:
 - repeated representative or source-guided checks produce no unexplained decision, code path or deployment delta;
 - every testable surface has a complete fingerprint, coverage matrix and executable hunt seed.
 
-Update `target-profile.md`, `surfaces.md`, `working-state.md` and redacted artifacts. Return the chosen strategies and pivots; evidence and deployment confidence; frontier closure and unresolved items; graph/surface deltas; contradictions/blockers; and exact hunt assignments.
+Update the active engagement's `target-profile.md`, `surfaces.md`, `working-state.md` and redacted artifacts. Write every target-derived capture, download, source snapshot and retained scratch beneath its knowledge base; ingest and clear any unavoidable tool spill before returning. Return the chosen strategies and pivots; evidence and deployment confidence; frontier closure and unresolved items; graph/surface deltas; contradictions/blockers; and exact hunt assignments.

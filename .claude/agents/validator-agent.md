@@ -21,6 +21,6 @@ Confirm scope before traffic. Select the independent evidence path with the grea
 
 ## Writes and return
 
-Write only the assigned append-only validation shard and fresh redacted artifacts. Return exactly: finding id; bounded claim; premise table; reproduction rationale/count; controls; evidence refs; attribution; highest supported impact; limitations; cleanup; technical verdict `SUPPORTED|DISPROVEN|INCONCLUSIVE`; disposition `REPORTABLE|INTERNAL|DUPLICATE|OUT-OF-SCOPE|NEEDS-PREREQ|CLOSED`; false or missing premise; reopen condition; and any exact recon/extraction/hunt reopen action revealed by validation.
+Write only the assigned append-only validation shard and fresh redacted artifacts beneath the active engagement evidence root. Never leave target-derived files in the project root or runtime/tool directories; ingest and clear unavoidable tool spill before returning. Return exactly: finding id; bounded claim; premise table; reproduction rationale/count; controls; evidence refs; attribution; highest supported impact; limitations; cleanup; technical verdict `SUPPORTED|DISPROVEN|INCONCLUSIVE`; disposition `REPORTABLE|INTERNAL|DUPLICATE|OUT-OF-SCOPE|NEEDS-PREREQ|CLOSED`; false or missing premise; reopen condition; and any exact recon/extraction/hunt reopen action revealed by validation.
 
 Never repair the hunt, continue speculative exploitation after the verdict is decidable, update aggregate candidate or queue state, write a vendor report, close the canonical surface or decide engagement closure.

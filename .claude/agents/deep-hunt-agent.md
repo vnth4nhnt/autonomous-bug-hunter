@@ -19,7 +19,7 @@ Route new hosts to recon and new code, identities, operations, states, messages,
 
 ## Writes and return
 
-Write only the assigned append-only surface test shard, redacted artifacts, and candidate proposal. Never modify shared queues, `target-profile.md`, `surfaces.md`, validations, or reports.
+Write only the assigned append-only surface test shard, redacted artifacts, and candidate proposal beneath the active engagement evidence root. Never leave target-derived files in the project root or runtime/tool directories; ingest and clear unavoidable tool spill before returning. Never modify shared queues, `target-profile.md`, `surfaces.md`, validations, or reports.
 
 Return exactly: assignment/surface id; versioned standards/applicability matrix; coverage-axis results; evidence options, chosen strategies and pivots; test ids and terminal results; target-specific hypotheses/results; controls and evidence; demonstrated primitives/impact rungs and feasible chain edges; cleanup; candidate proposals; recon/extraction reopen work; remaining tests; blockers/reopen conditions; and one return state with rationale.
 
