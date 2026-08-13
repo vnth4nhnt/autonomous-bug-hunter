@@ -17,8 +17,8 @@ Resolve `engagements/<name>/knowledge-base/artifacts/recon/` before the first co
 
 ## Continuous queue loop
 
-1. Read original scope, carve-outs and the active assignment. Expand only an explicitly assigned authorized wildcard/CIDR population; a host assignment never expands roots. A discovered node stays `candidate-scope` until its ownership and matching scope rule are evidenced.
-2. For an assigned passive population, run discovery on its authorized root/wildcard inputs, preserve provenance and enqueue every new candidate. Repeat incrementally after new relationships and once when its other queues appear drained.
+1. Read original scope, carve-outs and the active assignment. Expand subdomains only for an explicitly assigned wildcard; an exact host assignment never expands.
+2. For an assigned wildcard, run passive discovery, preserve provenance and scope-match each result before traffic. Repeat incrementally after new relationships and once when the other queues appear drained.
 3. For each verified in-scope host/service in the assignment, run the smallest applicable baseline below. Calibrate hosts individually, then fill the attached baseline pool within the per-host, shared-failure-domain and global limits in `CLAUDE.md`; do not serialize independent hosts without an evidence-based reason. Split hosts that differ in DNS/TLS, application behavior, identity realm, consumer/provider role, or technology; a shared template never proves shared security behavior.
 4. Record host/service and relationship deltas, then route every value-bearing application or unresolved trust edge to `attack-surface-extraction`. This includes identity/SSO, payment, email, signed capability, storage/CDN, webhook, worker/queue, cross-origin message, and third-party callback edges; an external consumer or redirect does not erase the in-scope producer, relying party, callback, session, or enforcement decision.
 5. Continue until the current host queue is drained. `defer` changes priority but remains queued and cannot satisfy closure.
@@ -41,7 +41,7 @@ If direct checks confirm exposed `.git`, use `git-dumper` only on that scoped pa
 
 The commands below are verified defaults and output contracts, not a requirement to use a weaker source when a semantics-preserving equivalent is already available. Every `<artifact>` is an absolute or verified engagement-relative descendant path. The pinned `ffuf` baseline remains required because its exact input set is a coverage invariant.
 
-- Use `subfinder -d <root> -silent -o <artifact>` for passive wildcard hostname candidates. Do not probe a candidate before scope/ownership is established.
+- Use `subfinder -d <suffix> -silent -o <artifact>` only when an explicit wildcard authorizes matching subdomains. Scope-match its output before traffic; never run it for an exact hostname.
 - Use DNS/TLS inspection followed by `httpx -l <scoped-input> -t 10 -rl 5 -json -sc -title -td -location -o <artifact>` for bounded live verification; lower limits to program rules.
 - Use `naabu` only when the scope explicitly authorizes port discovery. Prefer named or small port sets, save JSON, and verify material results with the real protocol.
 - Use headless `playwright` for representative browser behavior and network/JavaScript roots. Do not use `playwright-headed` during ordinary recon.
@@ -60,4 +60,4 @@ Keep completion separate from routing:
 
 When inline, update `target-profile.md` and queues. When delegated, return exactly: assignment id; scope touched; evidence strategy and mechanics/tool data; verified node/edge deltas and provenance; per-host baseline results; sensitive-resource classifications; runtime/code/schema/source roots and preliminary deployment confidence; behavioral clusters and unsampled uncertainty; contradictions; `work_status`; `handoff`; candidate-scope nodes; defer/reopen conditions; and ranked extraction questions.
 
-The recon queue is ready for active-boundary closure only when every applicable original population and discovered scoped host/service is `recon-bounded` or evidence-backed `out-of-scope`, every verified web host has the exact-input baseline, every value-bearing relationship has `extract` routing or an evidenced non-security rationale, no blocked item, testable `defer` or unresolved `candidate-scope` remains, a final incremental pass yields no new scoped node, relationship, sensitive resource or evidence root, and no target-derived artifact or spill remains outside the active engagement evidence root.
+The recon queue is ready for active-boundary closure only when every original wildcard population and scoped host/service is `recon-bounded` or evidence-backed `out-of-scope`, every verified web host has the exact-input baseline or an exact scope blocker, every value-bearing relationship has `extract` routing or an evidenced non-security rationale, no blocked item, testable `defer` or unresolved `candidate-scope` remains, a final in-scope refresh yields no new scoped node, relationship, sensitive resource or evidence root, and no target-derived artifact or spill remains outside the active engagement evidence root.
