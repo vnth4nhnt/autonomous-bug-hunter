@@ -1,48 +1,44 @@
 ---
 name: identity-signup
-description: Resolve an exact fixture prerequisite by preparing the minimum owned identities, roles, tenants, sessions, lifecycle states, and objects needed by authorized extraction, hunting, or validation while keeping secrets outside model-visible artifacts. Use only when a named queue action is blocked by missing fixtures or an expired baseline.
+description: Autonomously resolve an owned identity, mailbox, role, tenant, session, lifecycle-state or object prerequisite for authorized extraction, hunting or validation. Use as soon as a material queue action needs a fixture, before marking it blocked, and whenever an existing fixture expires or loses its required state.
 ---
 
 # Identity fixtures
 
-## Owner and handoff
+## Objective
 
-The orchestrator runs this skill inline at the private-state boundary; do not delegate credentials, mailbox access or secret-bearing browser state to a general agent. The skill consumes one exact fixture requirement and returns opaque labels, observed capabilities, owned controls, expiry and cleanup state to the blocked queue action. It does not invent a fixed account matrix, test a vulnerability or change queue priority.
+Treat fixtures as ordinary queue work. When a public flow can create the required account, mailbox, tenant, session, state or owned object, create and use it autonomously; never stop merely because the operator did not supply one.
 
-## Derive the fixture need
+## Derive the minimum fixture
 
-Start from the canonical decision or hypothesis. Name the exact missing subject, tenant, role, lifecycle state, credential type, owned object, and positive/negative control it enables. For federation, also name the in-scope relying party, normal IdP/issuer, client/tenant, callback, account-linking state and session outcome needed; use the external provider normally and test only the authorized local decisions. Do not build a fixed account matrix or create speculative tenants/accounts.
+Name the subject, tenant, role, lifecycle state, credential type, owned object and positive/negative control the fixture enables. For federation also name the in-scope relying party, normal issuer/client/tenant, callback, account-link state and session outcome. Avoid speculative account matrices, but create multiple accounts or tenants when the exact horizontal, vertical or cross-tenant boundary requires them.
 
-Prefer existing operator-provided test identities and privately controlled email addresses. Use consumer self-signup only when program rules permit it; use the normal browser flow and a private disposable inbox/domain, never a public temporary mailbox. Use SSO, payment, or transit systems normally without probing them.
+## Acquisition
 
-For financial, KYC, enterprise, paid, production-sensitive, or staff-only states, request documented operator fixtures rather than imitating eligibility.
+Follow this acquisition ladder without asking the operator: reuse a suitable live fixture; use an available mailbox integration; otherwise create an inbox through the normal API or headless web flow of a public disposable-mail service; if that path is unavailable or rejected, try an independent normal provider or target-supported signup route. A public temporary inbox controlled by the current tool session is an owned disposable fixture, not an operator prerequisite. Do not reject it merely because it is public or short-lived; honor an explicit program prohibition or target-side disposable-domain policy, then continue the ladder.
 
-## Provision and baseline
+Complete the target's normal public signup with generated fictional data. Poll the selected inbox only for the bounded verification window, match the intended recipient and target sender/domain, extract only the required link or OTP, and submit it through the target's normal flow. Do not inspect unrelated mail or test the mailbox provider. Public accounts and inboxes are expendable: create as many as evidenced cross-user, role or tenant controls require, use unique random credentials, and never use real PII, customer data or reused secrets.
 
-1. Inventory existing owned identities and record only observed capabilities; distinguish intended role labels from permissions actually exercised.
-2. Obtain the minimum missing identity through the product's normal signup, invite, membership, role-change, or tenant-creation flow.
-3. Stop for the operator at CAPTCHA, OTP, bot protection, KYC, PII, payment, domain approval, or any human-verification gate. Never rotate domains or flows to evade a control.
-4. Create unique controlled markers and only the disposable objects required for positive, negative, same-tenant, or cross-tenant fixtures.
-5. Capture a baseline happy path and denial relevant to the active question. For federated identity, record initiation, issuer/client/tenant selection, callback binding and resulting local subject/session without persisting secrets. After role, tenant, plan, link, or credential changes, re-baseline rather than assuming the label changed enforcement.
+If the signup entry is unknown, inspect the existing route/runtime/API ledger and public navigation before concluding it is absent; return an exact extraction question when discovery remains unresolved. A missing visible button is not evidence that self-registration does not exist. Feed every newly observed signup/login/recovery route, request field, header, redirect, token transition and resulting capability back to extraction, with secrets redacted.
 
-## Tool routing
+Use external mailbox, SSO, payment and transit services only through their normal user flows; do not test them or evade an explicit anti-abuse decision. Require the operator only for authority or facts unavailable to the system, paid/private eligibility, KYC, staff/domain approval, payment approval, or a human-only gate that available tools cannot complete normally.
 
-Use the product's normal channel that preserves the fixture's credential and lifecycle semantics. Headless `playwright` is preferred for browser signup, login, invite, role and tenant flows because it exposes redirects, state and human gates; use a protocol client for API/service identities when browser context is irrelevant. Use headed mode only when operator interaction is unavoidable or a recorded headless limitation blocks the exact step. Stop for the operator when credentials, mailbox access, CAPTCHA, OTP, payment or approval cannot remain private and tool-managed.
+## Provisioning loop
 
-Name browser contexts with opaque fixture labels. Never place passwords, cookies, tokens or mailbox links in CLI arguments, prompt text, screenshots or exported captures. Record only redacted request identifiers and observed capabilities.
+1. Inventory current fixtures by observed capability rather than role label.
+2. Complete signup, email verification, login and required state transitions in headless mode. Generate expendable credentials inside the capable browser/tool context and retain the authenticated session rather than exposing raw values in prompts or shell arguments. Use headed mode only for a real headless limitation or operator interaction.
+3. Create the minimum accounts, tenants, invitations and owned objects needed for positive, negative, cross-user, cross-role and cross-tenant controls.
+4. If one legitimate path fails, classify the cause and continue the acquisition ladder. Do not return `blocked` for a missing mailbox tool, one failed provider, disposable-domain rejection or missing operator email while another normal autonomous path remains.
+5. Return the fixture to the requesting queue immediately and keep its authenticated context alive while dependent work remains. Keep dependent work inline unless its assigned owner can use that same tool-managed context without receiving a raw secret.
 
-The project Playwright MCP uses isolated in-memory state. Treat MCP/browser restart as credential expiry: re-establish the normal login and baseline or mark the fixture blocked. Never export storage state into the project or knowledge base.
+## Secret handling
 
-## Secret boundary
+Keep passwords, cookies, tokens, mailbox access URLs, verification values and browser storage inside the capable tool context. Do not copy them into prompts, records, reports or agent messages; redact retained captures.
 
-Prefer tool-managed authenticated browser contexts or credential injection in which the model receives only a stable label. A private reference must be usable by the execution tool without revealing its value; if no such resolver exists, mark direct API replay blocked instead of placing the secret in prompts or shell text.
+## Record and return
 
-Keep passwords, cookies, JWTs, API keys, mailbox tokens, private keys, and plaintext browser storage outside the knowledge base, transcript, evidence, reports, and agent messages. Store only the private reference label, credential kind, valid asset/realm, expiry, and rotation/revocation state.
+Record only opaque fixture label; mailbox/credential kind; acquisition steps and bounded failure classes without access URLs; tenant/membership; claimed role and observed capabilities; owned object ids; authentication realm/channel; lifecycle events; valid assets; expiry; disposition; blocker; and cleanup owner in `engagements/<name>/knowledge-base/identities.md`.
 
-Never copy a secret-bearing legacy artifact into a new prompt. If one is encountered, stop reading it, record its path as a secret-handling issue without its value, and request operator cleanup/rotation.
+Retire disposable accounts, sessions and objects where the product permits it, and verify cleanup. When deletion is unavailable, log out/revoke what the product supports and record the inert retained fixture plus cleanup owner/reopen trigger; do not make closure impossible by claiming deletion occurred.
 
-## Capability and lifecycle record
-
-For each identity label, record tenant/membership, claimed role, observed capabilities, owned fixture IDs, authentication realm/channel, federation topology when applicable, credential/session lifecycle events, valid assets, expiry, blockers, and cleanup owner in `engagements/<name>/knowledge-base/identities.md`. Retire or revoke disposable identities/credentials and verify cleanup where the product permits it.
-
-Return fixture requirements satisfied, observed capability deltas, private labels usable by tools, owned objects, missing fixtures, blockers, expiry/reopen conditions, and verified or operator-owned cleanup. Never return raw credentials.
+Return the requesting queue and canonical id, satisfied requirement, opaque fixture labels, observed capabilities, owned objects, remaining prerequisite, expiry/reopen condition, cleanup state, and exactly one `acquisition_status`: `satisfied`, `continue`, or `operator-blocked`. Use `satisfied` only when the requesting action can now run; use `continue` while another normal acquisition action remains; use `operator-blocked` only for the exact exhausted operator-only gate. Never return raw credentials or mailbox contents.

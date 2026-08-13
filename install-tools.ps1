@@ -5,40 +5,39 @@ param([switch]$Force)
 $ErrorActionPreference = 'Stop'
 $lock = Get-Content (Join-Path $PSScriptRoot 'tools.lock.json') -Raw | ConvertFrom-Json
 if ($lock.schema_version -ne 1) { throw "Unsupported lock schema: $($lock.schema_version)" }
-
-function Add-UserPath([string]$Path) {
-    if (-not (Test-Path -LiteralPath $Path)) { return }
-    $parts = [Environment]::GetEnvironmentVariable('Path', 'User') -split ';'
-    if ($parts -notcontains $Path) {
-        [Environment]::SetEnvironmentVariable('Path', (($parts + $Path) -join ';').Trim(';'), 'User')
-    }
-    if (($env:PATH -split ';') -notcontains $Path) { $env:PATH += ";$Path" }
-}
+$runtime = Join-Path $PSScriptRoot '.runtime'
+$binRoot = Join-Path $runtime 'bin'
+New-Item -ItemType Directory -Force -Path $binRoot | Out-Null
 
 function Get-GoVersion([string]$Executable) {
     if (-not (Test-Path -LiteralPath $Executable)) { return $null }
-    $line = & go version -m $Executable 2>$null | Where-Object { $_ -match '^\s*mod\s+' } | Select-Object -First 1
+    try {
+        $line = & go version -m $Executable 2>$null | Where-Object { $_ -match '^\s*mod\s+' } | Select-Object -First 1
+    } catch { return $null }
     if ($line -match '^\s*mod\s+\S+\s+(\S+)') { return $Matches[1] }
     return $null
 }
 
 function Get-PipVersion([string]$Python, [string]$Package) {
-    $line = & $Python -m pip show $Package 2>$null | Where-Object { $_ -match '^Version:' } | Select-Object -First 1
+    try {
+        $line = & $Python -m pip show $Package 2>$null | Where-Object { $_ -match '^Version:' } | Select-Object -First 1
+    } catch { return $null }
     if ($line -match '^Version:\s*(.+)$') { return $Matches[1].Trim() }
     return $null
 }
 
 $go = Get-Command go -ErrorAction SilentlyContinue
 if (-not $go) { throw 'Go is required: https://go.dev/dl' }
-$goBin = Join-Path ((& $go.Source env GOPATH).Trim()) 'bin'
-New-Item -ItemType Directory -Force -Path $goBin | Out-Null
-Add-UserPath $goBin
+$goBin = $binRoot
+$previousGoBin = $env:GOBIN
+$env:GOBIN = $goBin
 
 foreach ($item in $lock.go.PSObject.Properties) {
     $name, $spec = $item.Name, $item.Value
     $exe = Join-Path $goBin "$name.exe"
     $current = Get-GoVersion $exe
     if ($Force -or $current -ne $spec.version) {
+        if (Test-Path -LiteralPath $exe) { Remove-Item -LiteralPath $exe -Force }
         & $go.Source install "$($spec.module)@$($spec.version)"
         if ($LASTEXITCODE) { throw "go install failed: $name" }
         $current = Get-GoVersion $exe
@@ -46,25 +45,29 @@ foreach ($item in $lock.go.PSObject.Properties) {
     if ($current -ne $spec.version) { throw "${name}: expected $($spec.version), found $current" }
     Write-Host "[OK] $name $current"
 }
+if ($null -eq $previousGoBin) { Remove-Item Env:GOBIN -ErrorAction SilentlyContinue } else { $env:GOBIN = $previousGoBin }
 
 $python = Get-Command python -ErrorAction SilentlyContinue
 if (-not $python) { $python = Get-Command py -ErrorAction SilentlyContinue }
 if (-not $python) { throw 'Python is required.' }
+$venvRoot = Join-Path $runtime 'python'
+$venvPython = Join-Path $venvRoot 'Scripts/python.exe'
+if (-not (Test-Path -LiteralPath $venvPython)) {
+    & $python.Source -m venv $venvRoot
+    if ($LASTEXITCODE) { throw 'Python virtual environment creation failed.' }
+}
 
 foreach ($item in $lock.python.PSObject.Properties) {
     $name, $wanted = $item.Name, [string]$item.Value
-    $current = Get-PipVersion $python.Source $name
+    $current = Get-PipVersion $venvPython $name
     if ($Force -or $current -ne $wanted) {
-        & $python.Source -m pip install --disable-pip-version-check --upgrade "$name==$wanted"
+        & $venvPython -m pip install --disable-pip-version-check --upgrade "$name==$wanted"
         if ($LASTEXITCODE) { throw "pip install failed: $name" }
-        $current = Get-PipVersion $python.Source $name
+        $current = Get-PipVersion $venvPython $name
     }
     if ($current -ne $wanted) { throw "${name}: expected $wanted, found $current" }
     Write-Host "[OK] $name $current"
 }
-
-$pythonExe = (& $python.Source -c 'import sys; print(sys.executable)').Trim()
-Add-UserPath (Join-Path (Split-Path $pythonExe) 'Scripts')
 
 $npm = Get-Command npm -ErrorAction SilentlyContinue
 if (-not $npm) { throw 'Node.js with npm is required.' }

@@ -7,7 +7,7 @@ description: Operate the candidate queue by independently testing one bounded se
 
 ## Owner and handoff
 
-A fresh `validator-agent` owns exactly one candidate and writes only its validation shard and artifacts. The orchestrator supplies the allowlisted claim context, then alone merges the verdict into aggregate candidate/queue state. The skill returns a technical verdict, reporting disposition and any exact recon/extraction/hunt reopen action; it never writes a report or closes the canonical surface.
+A fresh `validator-agent` owns exactly one candidate and writes only its validation shard and artifacts. The orchestrator supplies the allowlisted claim context, then alone merges the verdict into aggregate candidate/queue state. The skill returns a technical verdict, reporting disposition, `validation_status: decided|continue|operator-blocked`, and any exact fixture/recon/extraction/hunt handoff; it never writes a report or closes the canonical surface.
 
 ## Independence and claim model
 
@@ -26,7 +26,7 @@ Choose the independent refutation path with the greatest power to decide a mater
 
 ## Refutation loop
 
-1. Confirm machine scope and prerequisites before traffic. If the candidate is out of scope, send nothing and record that disposition without deciding technical truth.
+1. Confirm candidate scope and prerequisites before traffic. If an autonomously obtainable owned fixture is missing, return `fixture-needed` and `validation_status: continue`; the orchestrator runs `identity-signup` and schedules a fresh validation attempt. If the candidate is out of scope, send nothing and record that disposition without deciding technical truth.
 2. Attack the cheapest decisive premise first. Reproduce every surviving live-effect premise from fresh state with independent fixtures and markers. Repeat in proportion to instability, timing, statefulness and impact; deterministic evidence does not require ritual duplicate runs, while noisy claims require enough controlled samples.
 3. Run valid positive, invalid negative, and applicable alternate-cause controls. Attribute behavior to the claimed client, service, parser, cache, worker, or protocol component rather than assuming server-side origin.
 4. Challenge cache/WAF/gateway behavior, reflection without execution, parser normalization, client-only effects, stale or replicated state, timing noise, by-design behavior, unrealistic prerequisites, and program exclusions.
@@ -59,8 +59,8 @@ Reporting disposition:
 - `INTERNAL`: supported but below threshold or useful only as a chain/hardening observation.
 - `DUPLICATE`, `OUT-OF-SCOPE`, `NEEDS-PREREQ`, or `CLOSED`: state the precise reason.
 
-Normally `INTERNAL` or `DUPLICATE` follows a supported technical claim, `CLOSED` follows a disproven claim, and `NEEDS-PREREQ` follows an inconclusive claim. `OUT-OF-SCOPE` records that no technical decision was attempted. If a different pairing is necessary, explain it; disposition never changes technical truth.
+Normally `INTERNAL` or `DUPLICATE` follows a supported technical claim, `CLOSED` follows a disproven claim, and `NEEDS-PREREQ` follows an inconclusive claim. `OUT-OF-SCOPE` records that no technical decision was attempted. If a different pairing is necessary, explain it; disposition never changes technical truth. `NEEDS-PREREQ` is nonterminal with `validation_status: continue` while the prerequisite is autonomously obtainable; use `operator-blocked` only for an exact exhausted operator-only gate. All other decided pairings use `validation_status: decided`.
 
 Write `engagements/<name>/knowledge-base/validations/<id>.md` as an append-only validation shard containing the premise table, reproduction count/rationale, controls, evidence, impact bound, limitations, cleanup, technical verdict, disposition, and reopen condition. Store fresh redacted captures under `engagements/<name>/knowledge-base/artifacts/`. Do not rewrite the hunter's record, aggregate finding state, or vendor report; the orchestrator owns synthesis.
 
-If refutation reveals a new scoped host/service, return exact recon work. If it reveals new code, identity, operation, subject, state, parser, consumer, service/trust edge, identifier transport, implementation, or channel, return exact extraction work. A terminal candidate disposition never closes another test or its canonical surface.
+If refutation reveals a new scoped host/service, return exact recon work. If it reveals new code, identity, operation, subject, state, parser, consumer, service/trust edge, identifier transport, implementation, or channel, return exact extraction work. Return an autonomously obtainable missing fixture to `identity-signup` without closing the candidate. A terminal candidate disposition never closes another test or its canonical surface.

@@ -3,17 +3,19 @@ Prompt-based autonomous evidence-adaptive web security testing workflow for auth
 
 ## Setup
 
-Requires Claude Code or Codex, Go, Python, and Node.js 18+.
+Requires Claude Code or Codex, Go, Python, and Node.js 18+. Install the project-local toolchain once:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\install-tools.ps1
 ```
 
-Approve the project MCP servers in Claude Code or trust the project in Codex once. The installer pins the CLI tools, Playwright MCP, local Chromium, and the sensitive-file wordlist.
+Approve the project MCP servers in Claude Code or trust the project in Codex once. Engagements assume the project-local toolchain is available.
 
 ## Run
 
 Open this project at its root, replace `<NAME>` and `<SCOPE_FILE>` in `prompt.txt`, then send the prompt to Claude Code or Codex. Keep authorization material and all engagement output under `engagements/<name>/knowledge-base/`.
+
+Each run maintains a concise `surface-inventory.md` table of discovered user interactions and API/message operations by domain, endpoint, method/action, params, body/message, authentication, and authorization.
 
 ## Structure
 
