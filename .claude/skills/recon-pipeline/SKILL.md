@@ -7,13 +7,13 @@ description: Continuously turn authorized scope into a verified host/service que
 
 ## Owner and boundary
 
-The orchestrator may run this method inline or assign one scoped host, one non-overlapping bounded host batch, or one passive discovery population to `recon-agent`. A delegated agent writes only raw redacted artifacts and proposes deltas; the orchestrator alone updates the host/surface queues and `target-profile.md`.
+The orchestrator may run this method inline or assign one scoped host, one non-overlapping bounded host batch, or one passive discovery population to `recon-agent`. A delegated agent writes only canonical material redacted evidence and proposes deltas; the orchestrator alone updates the host/surface queues and `target-profile.md`.
 
 Recon discovers and verifies breadth. It does not perform authenticated role/state extraction, broad vulnerability fuzzing, candidate validation, or safety claims.
 
 The host baseline and its completion evidence are invariant. Within that boundary, choose passive sources, protocol clients, browser capture, public implementation metadata or a hybrid by expected routing value and cost. Do not repeat equivalent discovery merely because a named tool is available.
 
-Resolve `engagements/<name>/knowledge-base/artifacts/recon/` before the first command and use only verified descendant paths for target inputs, outputs, downloads and retained scratch. Never use the project root as a working/output directory. Ingest unavoidable Playwright MCP spill into `artifacts/recon/browser/` and clear the spill after each browser batch.
+Resolve `engagements/<name>/knowledge-base/artifacts/recon/` before the first command and use only verified descendant paths. Retain normalized reproduction inputs and every materially distinct result needed for classification or routing, with one canonical representation per evidence-equivalent result; record empty/equivalent outcomes in the recon record instead of keeping zero-byte logs or duplicate stdout/structured output. Never use the project root as a working/output directory. Ingest unavoidable Playwright spill, retain its materially distinct evidence and clear the rest after each batch.
 
 ## Continuous queue loop
 
@@ -47,7 +47,7 @@ The commands below are verified defaults and output contracts, not a requirement
 - Use headless `playwright` for representative browser behavior and network/JavaScript roots. Do not use `playwright-headed` during ordinary recon.
 - Use `ffuf` after calibrating each host with the pinned sensitive baseline plus evidence-derived sensitive paths: put the relative-path word at `https://<scoped-host>/FUZZ`, no recursion, `-mc all -t 10 -rate 25 -maxtime 600 -s -of json -o <artifact>.json`, no response prefilter, and no redirect following. Fill an attached pool of up to eight calibrated hosts while keeping <=10 workers and <=25 requests/second per host, <=80 workers and <=200 requests/second globally, and <=100 requests/second for any apparent shared failure domain. Reallocate unused workers when latency requires it without exceeding those caps. Reduce concurrency or stop affected jobs together on 429, WAF bursts, rising latency/errors, or instability. Uniform routing is a classification target, not an early-stop condition. Every job must remain owned, observable and cancellable; do not detach a fleet scheduler. A process exit code or output-file existence does not prove completion: parse each host's JSON and verify that every exact pinned entry appears at least once in the ordinal union of attempted inputs; record unexpected or evidence-derived extras separately. Reuse a prior larger run when it proves the same exact requests, then replay only pinned entries missing for that host at the ordinary rate or record the exact blocker. Mechanical shards must be disjoint for pinned inputs, and closure is decided per host on their verified coverage union. Preserve meaningful `401/403` results for the bounded follow-up above. Do not use `sqlmap` or `interactsh-client` for generic recon.
 
-For every run preserve normalized inputs, exact command/MCP action, version, rate/concurrency, timestamps, failures, calibration, and raw redacted output. Empty output is bounded to that input, method, and time.
+For every run record normalized inputs, exact command/MCP action, version, rate/concurrency, timestamps, exit, failures and calibration; retain materially distinct redacted outputs and remove evidence-equivalent copies. Empty output is recorded as bounded to that input, method and time, not retained as an empty file.
 
 ## Status, handoff, and output
 

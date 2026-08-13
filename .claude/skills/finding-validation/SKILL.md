@@ -7,7 +7,7 @@ description: Operate the candidate queue by independently testing one bounded se
 
 ## Owner and handoff
 
-A fresh `validator-agent` owns exactly one candidate and writes only its validation shard and artifacts. The orchestrator supplies the allowlisted claim context, then alone merges the verdict into aggregate candidate/queue state. The skill returns a technical verdict, reporting disposition, `validation_status: decided|continue|operator-blocked`, and any exact fixture/recon/extraction/hunt handoff; it never writes a report or closes the canonical surface.
+A fresh `validator-agent` owns exactly one candidate and writes only its validation shard and materially distinct fresh evidence. The orchestrator supplies the allowlisted claim context, then alone merges the verdict into aggregate candidate/queue state. The skill returns a technical verdict, reporting disposition, `validation_status: decided|continue|operator-blocked`, and any exact fixture/recon/extraction/hunt handoff; it never writes a report or closes the canonical surface.
 
 ## Independence and claim model
 
@@ -61,6 +61,6 @@ Reporting disposition:
 
 Normally `INTERNAL` or `DUPLICATE` follows a supported technical claim, `CLOSED` follows a disproven claim, and `NEEDS-PREREQ` follows an inconclusive claim. `OUT-OF-SCOPE` records that no technical decision was attempted. If a different pairing is necessary, explain it; disposition never changes technical truth. `NEEDS-PREREQ` is nonterminal with `validation_status: continue` while the prerequisite is autonomously obtainable; use `operator-blocked` only for an exact exhausted operator-only gate. All other decided pairings use `validation_status: decided`.
 
-Write `engagements/<name>/knowledge-base/validations/<id>.md` as an append-only validation shard containing the premise table, reproduction count/rationale, controls, evidence, impact bound, limitations, cleanup, technical verdict, disposition, and reopen condition. Store fresh redacted captures under `engagements/<name>/knowledge-base/artifacts/`. Do not rewrite the hunter's record, aggregate finding state, or vendor report; the orchestrator owns synthesis.
+Write `engagements/<name>/knowledge-base/validations/<id>.md` as an append-only validation shard containing the premise table, reproduction count/rationale, controls, evidence, impact bound, limitations, cleanup, technical verdict, disposition, and reopen condition. Retain every materially distinct fresh evidence component under `engagements/<name>/knowledge-base/artifacts/`, with one canonical representation per evidence-equivalent result; record empty or equivalent outcomes in the shard instead of creating extra files. Do not rewrite the hunter's record, aggregate finding state, or vendor report; the orchestrator owns synthesis.
 
 If refutation reveals a new scoped host/service, return exact recon work. If it reveals new code, identity, operation, subject, state, parser, consumer, service/trust edge, identifier transport, implementation, or channel, return exact extraction work. Return an autonomously obtainable missing fixture to `identity-signup` without closing the candidate. A terminal candidate disposition never closes another test or its canonical surface.

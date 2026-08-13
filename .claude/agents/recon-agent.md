@@ -19,6 +19,6 @@ Do not perform deep authenticated walking, arbitrary wordlist or payload fuzzing
 
 ## Writes and return
 
-Write only assigned redacted raw artifacts beneath the active engagement evidence root. Never write target-derived files to the project root or runtime/tool directories; ingest and clear unavoidable tool spill before returning. The orchestrator updates shared records and queues.
+Write only materially distinct evidence for the assignment beneath the active engagement evidence root. Keep one canonical representation per evidence-equivalent result; record empty or equivalent outcomes in the return instead of creating empty logs or duplicate stdout. Never write target-derived files to the project root or runtime/tool directories; ingest material evidence and clear unavoidable tool spill before returning. The orchestrator updates shared records and queues.
 
 Return exactly: assignment id; scope touched; evidence strategy and mechanics/tool/version/options; evidence refs; verified node/edge deltas and provenance; per-host baseline completion and sensitive-resource classifications; runtime/code/schema/source roots and preliminary deployment confidence; clusters and unsampled uncertainty; contradictions; `work_status`; `handoff` with rationale; candidate-scope nodes; defer/reopen conditions; and ranked extraction questions.
