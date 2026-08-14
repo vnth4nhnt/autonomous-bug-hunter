@@ -1,3 +1,6 @@
+[apps._default]
+enabled = false
+
 [mcp_servers.playwright]
 command = "node"
 args = ["./.runtime/playwright-mcp/node_modules/@playwright/mcp/cli.js", "--headless", "--isolated", "--output-dir", "./.runtime/playwright-headless-output", "--viewport-size", "1366x768"]

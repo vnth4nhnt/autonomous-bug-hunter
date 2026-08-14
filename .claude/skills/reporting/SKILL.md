@@ -78,10 +78,10 @@ Cleanup: <Owned state restored or removed, verification performed, and any opera
 - In Remediation, address the failed authorization, validation, state, parser, capability, or trust decision as close as possible to the enforcement point. Avoid generic advice such as `sanitize input`. Do not invent implementation details.
 - Ensure every material sentence traces to validator-supported premises or raw evidence. Exclude rejected theories, speculative payloads, validation history, and confidence theater from the vendor report.
 
-Write drafts to `engagements/<name>/REPORT-DRAFTS/<finding-id>.md`. Only the operator may move a reviewed draft to `engagements/<name>/READY-TO-SUBMIT/`.
+Write drafts to `engagements/<name>/knowledge-base/REPORT-DRAFTS/<finding-id>.md`. Only the operator may move a reviewed draft to `engagements/<name>/knowledge-base/READY-TO-SUBMIT/`.
 
 ## Engagement summary
 
 Produce a separate engagement summary only after a bounded adversarial audit. Apply the same ASCII-only and no-hard-wrap rules. State the audited scope, roles and states actually exercised, supported findings and dispositions, meaningful negative conclusions, blockers, unowned gaps, residual uncertainty, and reopen conditions. Never convert endpoint counts, percentages, or absence of findings into assurance.
 
-Store the engagement summary at `engagements/<name>/knowledge-base/engagement-summary.md`, not `READY-TO-SUBMIT/`. Preserve validation history and internal observations in the knowledge base, never in vendor reports.
+Store the engagement summary at `engagements/<name>/knowledge-base/engagement-summary.md`, not `knowledge-base/READY-TO-SUBMIT/`. Preserve validation history and internal observations in the knowledge base, never in vendor reports.
