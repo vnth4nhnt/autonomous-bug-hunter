@@ -15,6 +15,7 @@ engagements/
 *.dpapi
 *.key
 *.pem
+engagements/**/.secrets/
 
 # OS noise
 .DS_Store

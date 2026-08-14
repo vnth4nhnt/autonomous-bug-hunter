@@ -84,4 +84,4 @@ Write drafts to `engagements/<name>/REPORT-DRAFTS/<finding-id>.md`. Only the ope
 
 Produce a separate engagement summary only after a bounded adversarial audit. Apply the same ASCII-only and no-hard-wrap rules. State the audited scope, roles and states actually exercised, supported findings and dispositions, meaningful negative conclusions, blockers, unowned gaps, residual uncertainty, and reopen conditions. Never convert endpoint counts, percentages, or absence of findings into assurance.
 
-Store the engagement summary in the engagement knowledge base, not `READY-TO-SUBMIT/`. Preserve validation history and internal observations in the knowledge base, never in vendor reports.
+Store the engagement summary at `engagements/<name>/knowledge-base/engagement-summary.md`, not `READY-TO-SUBMIT/`. Preserve validation history and internal observations in the knowledge base, never in vendor reports.
