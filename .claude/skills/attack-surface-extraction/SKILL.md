@@ -7,7 +7,7 @@ description: Adaptively build and close the security graph for one authorized ap
 
 ## Owner and objective
 
-Run this skill inline because the orchestrator alone owns the shared security graph, `surface-inventory.md`, `surfaces.md`, and extraction/hunt queues. Consume one live-host or live-flow relationship item and turn the strongest available evidence into canonical security decisions without judging vulnerability. Never create extraction or hunting work for a passive/DNS/TLS-only/non-responding candidate; return it to reachability recon until a real response promotes it. Track one `extraction_status`: `continue`, `graph-bounded`, or `operator-blocked`; discoveries and fixture/hunt/recon work are separate handoffs and never close the originating graph item.
+Run this skill inline because the orchestrator alone owns the shared security graph, `surface-inventory.md`, `surfaces.md`, and extraction/hunt queues. Consume the live-host and live-flow items inside one active `APP-ID` and turn the strongest available evidence into canonical security decisions without judging vulnerability. Never create extraction or hunting work for a passive/DNS/TLS-only/non-responding candidate; return it to reachability recon until a real response promotes it. Track one `extraction_status`: `continue`, `graph-bounded`, or `operator-blocked`; discoveries and fixture/hunt/recon work are separate handoffs and never close the originating graph item.
 
 A redirect-only host, external consumer, absent document, missing fixture or no JavaScript remains extractable: preserve the in-scope relying party, producer, callback, session and trust decision. Extraction is complete by explained decisions and frontiers, not by executing a fixed technique.
 
@@ -76,7 +76,7 @@ Keep one stable `OP-ID` row per distinct method/action and per materially differ
 
 For each surface record:
 
-- stable id and fingerprint from value, decision, enforcement point, object/action, protocol and trust boundary;
+- stable id, owning `APP-ID`, any crossed `APP-ID` trust edge, and fingerprint from value, decision, enforcement point, object/action, protocol and trust boundary;
 - exact GRAPH and HUNT item state, owner and next action/reopen trigger;
 - mapped stable `OP-ID` and relevant `CF-ID` values, without copying either table;
 - producers/consumers, components, subjects/credentials, object/action/state, channel/version, boundary and intended invariant;

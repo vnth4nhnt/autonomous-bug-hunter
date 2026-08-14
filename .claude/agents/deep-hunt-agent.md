@@ -19,7 +19,7 @@ Emit new-host, extraction, fixture and candidate handoffs without changing `work
 
 ## Writes and return
 
-Write only the assigned append-only surface test shard, candidate proposal and materially distinct evidence in the kernel's Hunt paths. Keep one canonical representation per evidence-equivalent result; record empty or equivalent outcomes in the test shard. Never leave target-derived files in the project root or runtime/tool directories; ingest material evidence and clear unavoidable tool spill before returning. Never modify shared queues, `target-profile.md`, `surface-inventory.md`, `surfaces.md`, `tests/wstg-coverage.md`, validations, or reports.
+Write only the assigned append-only surface test shard and materially distinct evidence in the kernel's Hunt paths. Return any candidate proposal to the orchestrator; never create or update the canonical candidate record. Keep one canonical representation per evidence-equivalent result; record empty or equivalent outcomes in the test shard. Never leave target-derived files in the project root or runtime/tool directories; ingest material evidence and clear unavoidable tool spill before returning. Never modify shared queues, `target-profile.md`, `surface-inventory.md`, `surfaces.md`, `tests/wstg-coverage.md`, candidates, validations, or reports.
 
 Return only: assignment/`SURF-ID`; `work_status` with one-sentence rationale; test ids and terminal axis/WSTG transitions; material hypothesis or final-synthesis delta; controls/evidence refs and demonstrated primitive/impact delta; cleanup; and exact candidate/fixture/recon/extraction/blocker/reopen items. Cite the test shard for unchanged matrices and method detail.
 

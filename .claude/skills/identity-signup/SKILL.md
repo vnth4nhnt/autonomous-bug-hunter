@@ -1,13 +1,13 @@
 ---
 name: identity-signup
-description: Autonomously create or restore an owned identity, mailbox, role, tenant, session, lifecycle state or object for authorized extraction, hunting or validation. Use immediately when a permitted normal public self-registration path is grounded to prewarm the minimum verified account/session, whenever a material queue action needs another fixture, before marking it operator-blocked, and whenever an existing fixture expires or loses required state.
+description: Autonomously create or restore an owned identity, mailbox, role, tenant, session, lifecycle state or object for authorized extraction, hunting or validation. After fast recon, use it as the first action when an active host/application boundary has a grounded permitted public self-registration path; also use it whenever a material queue action needs another fixture, before marking it operator-blocked, or when an existing fixture expires or loses required state.
 ---
 
 # Identity fixtures
 
 ## Objective
 
-Treat fixtures as ordinary queue work. When a permitted public flow can create an account, mailbox, tenant, session, state or owned object, create and use it autonomously; never stop merely because the operator did not supply one. Public self-registration is an eager trigger: once its real entry flow is grounded, prewarm one minimum verified account/session and return it to authenticated extraction even before a hunt is blocked. Reuse that fixture across compatible work; additional identities remain demand-driven by exact controls.
+Treat fixtures as ordinary queue work. When a permitted public flow can create an account, mailbox, tenant, session, state or owned object, create and use it autonomously; never stop merely because the operator did not supply one. Public self-registration is an eager trigger: record it during recon, then prewarm one minimum verified account/session as soon as its host/application boundary becomes active and return it to authenticated extraction before hunting. Reuse that fixture across compatible work; additional identities remain demand-driven by exact controls.
 
 ## Derive the minimum fixture
 

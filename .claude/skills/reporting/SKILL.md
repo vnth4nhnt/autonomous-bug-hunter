@@ -1,6 +1,6 @@
 ---
 name: reporting
-description: Convert a SUPPORTED and REPORTABLE validation into an evidence-faithful vendor report with a fixed schema, or produce the bounded engagement summary after BOUNDED-PASS. Use inline by the orchestrator immediately after validation or at audited closure; never use it to repair missing evidence.
+description: Convert a SUPPORTED and REPORTABLE validation into an evidence-faithful vendor report with a fixed schema, or produce the bounded engagement summary only after an engagement-wide BOUNDED-PASS. Use inline by the orchestrator immediately after validation or at final audited closure; never use it to repair missing evidence.
 ---
 
 # Reporting
@@ -82,6 +82,6 @@ Write drafts to `engagements/<name>/knowledge-base/REPORT-DRAFTS/<finding-id>.md
 
 ## Engagement summary
 
-Produce a separate engagement summary only after a bounded adversarial audit. Apply the same ASCII-only and no-hard-wrap rules. State the audited scope, roles and states actually exercised, supported findings and dispositions, meaningful negative conclusions, blockers, unowned gaps, residual uncertainty, and reopen conditions. Never convert endpoint counts, percentages, or absence of findings into assurance.
+Produce a separate engagement summary only after the engagement-wide auditor returns `BOUNDED-PASS`; a local host/application pass never satisfies this gate. Apply the same ASCII-only and no-hard-wrap rules. State the audited scope, roles and states actually exercised, supported findings and dispositions, meaningful negative conclusions, blockers, unowned gaps, residual uncertainty, and reopen conditions. Never convert endpoint counts, percentages, or absence of findings into assurance.
 
 Store the engagement summary at `engagements/<name>/knowledge-base/engagement-summary.md`, not `knowledge-base/READY-TO-SUBMIT/`. Preserve validation history and internal observations in the knowledge base, never in vendor reports.

@@ -13,7 +13,7 @@ Approve the project MCP servers in Claude Code or trust the project in Codex onc
 
 ## Run
 
-Open this project at its root, replace `<NAME>` and `<SCOPE_FILE>` in `prompt.txt`, then send the prompt to Claude Code or Codex. Keep authorization material and all engagement output under `engagements/<name>/knowledge-base/`.
+Open this project at its root, replace `<NAME>` and `<SCOPE_FILE>` in `prompt.txt`, then send the prompt to Claude Code or Codex. Keep authorization material and evidence under `engagements/<name>/knowledge-base/`; private fixture state stays in the gitignored `engagements/<name>/.secrets/`.
 
 Each run maintains a concise `surface-inventory.md` table of discovered user interactions and API/message operations by domain, endpoint, method/action, params, body/message, authentication, and authorization.
 
